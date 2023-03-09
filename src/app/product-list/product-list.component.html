@@ -1,0 +1,24 @@
+<h2>Products</h2>
+<h4 *ngIf="products">Found {{ products.length }} products</h4>
+<h4>Total number of notifications: {{ totalShares }}</h4>
+<h4>Last product on notified queue: {{ lastProductNotified }}</h4>
+<div *ngFor="let product of products">
+  <h3>
+    <a
+      [title]="product.name + ' details'"
+      [routerLink]="['/products', product.id]"
+    >
+      {{ product.name }}
+    </a>
+    <p *ngIf="product.description">Description: {{ product.description }}</p>
+    <button type="button" (click)="share()">Share</button>
+  </h3>
+  <app-product-alerts [product]="product" (notifyLast)="updateShares($event)">
+  </app-product-alerts>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
